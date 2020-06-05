@@ -13,11 +13,11 @@
 <section id="app" class="container">
     <div class="auth">
         <p class="info">Сделать веб приложение, на выбранном вами языке, при открытии должно показать кнопку «авторизоваться» по нажатию делает oauth авторизацию ВКонтакте, и показывает имя авторизованного пользователя и 5 любых друзей пользователя. При последующих запусках/заходах на страницу сразу показывает всю информацию т.к. уже понимает, что авторизовано и авторизация запоминается. Бекенд если потребуется, на любой технологии на ваш выбор.</p>
+        Очистка локального хранилища <a href="#" class="" onclick="localStorage.clear(); location.reload();">localStorage</a></p>
         <hr>
         <div class="text-center">
             <a role="button" href="https://oauth.vk.com/authorize?client_id=7500252&redirect_uri=https://atyhtotoda.github.io/auth_test1/&scope=friends&response_type=token&v=5.52" class="btn col-sm-4 btn-outline-primary btn-lg" id="btn">Авторизоваться</a>
     </div>
-            Очистка локального хранилища <a href="#" class="" onclick="localStorage.clear(); location.reload();">localStorage</a></p>
     <div class="container">
         <h2 id="username" class="text-center" style="display: none"></h2>
         <hr>
