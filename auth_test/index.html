@@ -48,7 +48,7 @@
         send('friends.search',{count:5, fields:'photo_100'}, function (data) {
             render(data.response);
         });
-        send('users.get',{}, function (data) {
+       send('users.get',{fields: 'user_ids'}, function (data) {
             //render
             const btn = '<button type="button" onclick="localStorage.clear(); location.reload();" class="btn btn-dark">Выйти</button>';
             $('#username').html(data.response[0].first_name + ' ' + data.response[0].last_name + ' '+  btn).show();
