@@ -120,6 +120,7 @@
         VK.Auth.login(function (response) {
             if (response.session) {
                 showAuthData(response.session);
+                friends(response.session);
 
                 if (response.settings) {
                     console.log(response.settings);
@@ -132,13 +133,26 @@
     }
 
 
-    function showAuthData(data) {
+    const showAuthData = (data) => {
         $('body').append('<p>expire: ' + data.expire +'</p>');
         $('body').append('<p>mid: ' + data.mid +'</p>');
         $('body').append('<p>fio: ' + data.user.first_name + ' ' + data.user.last_name +'</p>');
         $('body').append('<p>userDomain: ' + data.user.domain +'</p>');
         $('body').append('<p>-----------------------------------------------</p>');
     }
+
+    const friends = (data) => {
+        VK.Api.call('friends.get', {fields: ['uid', 'first_name', 'last_name'], order: 'name'}, function(r){
+            if(r.response){
+                r = r.response;
+                var ol = $('#clientApi').add('ol');
+                for(var i = 0; i < 5; ++i){
+                    var li = ol.add('li').html(r[i].first_name+' '+r[i].last_name+' ('+r[i].uid+')')
+                }
+            }else alert("Не удалось получить список ваших друзей");
+        })
+    };
+
     const btn = document.querySelector('.js-login');
     btn.addEventListener('click', function () {
         login()
