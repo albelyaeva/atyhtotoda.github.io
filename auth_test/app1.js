@@ -120,7 +120,6 @@
         VK.Auth.login(function (response) {
             if (response.session) {
                 showAuthData(response.session);
-                friends(response.session);
 
                 if (response.settings) {
                     console.log(response.settings);
@@ -141,7 +140,7 @@
         $('body').append('<p>-----------------------------------------------</p>');
     }
 
-    const friends = (data) => {
+    const friends = () => {
         VK.Api.call('friends.get', {fields: ['uid', 'first_name', 'last_name'], order: 'name'}, function(r){
             if(r.response){
                 r = r.response;
@@ -155,7 +154,8 @@
 
     const btn = document.querySelector('.js-login');
     btn.addEventListener('click', function () {
-        login()
+        login();
+        friends()
     })
 
 })();
