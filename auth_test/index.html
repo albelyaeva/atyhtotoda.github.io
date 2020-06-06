@@ -51,7 +51,7 @@
         send('users.get',{}, function (data) {
             //render
             const btn = '<button type="button" onclick="localStorage.clear(); location.reload();" class="btn btn-dark">Выйти</button>';
-            $('#username').html('+data.response[0].first_name+' + '+data.response[0].last_name+' + btn).show();
+            $('#username').html(data.response[0].first_name + ' ' + data.response[0].last_name + ' '+  btn).show();
         });
     }
 
