@@ -139,17 +139,19 @@
         $('body').append('<p>userDomain: ' + data.user.domain +'</p>');
         $('body').append('<p>-----------------------------------------------</p>');
     }
+    const showFriends = (data) => {
+        var ol = $('#clientApi').add('ol');
+        for(var i = 0; i < data.length; ++i){
+            var li = ol.add('li').html(data[i].first_name+' '+data[i].last_name+' ('+data[i].uid+')')
+        }
+    }
 
     const friends = () => {
-        VK.Api.call('friends.get', {fields: ['uid', 'first_name', 'last_name'], order: 'name'}, function(r){
-            if(r.response){
-                r = r.response;
-                var ol = $('#clientApi').add('ol');
-                for(var i = 0; i < 5; ++i){
-                    var li = ol.add('li').html(r[i].first_name+' '+r[i].last_name+' ('+r[i].uid+')')
-                }
-            }else alert("Не удалось получить список ваших друзей");
-        })
+        VK.Api.call('friends.get', {order: 'random', count: 5, fields: 'nickname,photo_100'}, function (data) {
+            if (data.response) {
+                showFriends(data.response)
+            }
+                })
     };
 
     const btn = document.querySelector('.js-login');
