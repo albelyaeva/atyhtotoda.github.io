@@ -5,64 +5,44 @@
     <title>Тестовое задание по oauth</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://vk.com/js/api/openapi.js?168" type="text/javascript"></script>
+    <link rel="stylesheet" href='styles/1.css'>
+    <script src="app1.js"></script>
 </head>
 <body>
 <br>
+<div class="app">
 <div class="login">
     <button class="login__button js-login" id="login-js">
         Login
     </button>
 </div>
 <div class="error">
-    <div class="error__message">You are not authenticated</div>
+    <div class="error__message">Требуется авторизация</div>
 </div>
-<div class="success">
+<section class="container">
     <div class="user-info js-user-info">
 
     </div>
-    <ul class="friends-list js-friends-list">
+    <ul class="friends-info js-friends-info">
 
     </ul>
-</div>
-<section id="clientApi">Клиентский API</section>
+</section>
 </div>
 <script type="text/template" id="friend-template">
-    <li class="friends-list__item">
-        <div class="user-card">
-            <div class="user-card__photo-box"><img class="user-card__photo" src="%photo_100%" alt="%last_name% %first_name%"></div>
-            <div class="user-card__name">%last_name% %first_name%</div>
+    <li class="friends-items">
+        <div class="friend-info">
+            <div class="friend-info__photo-box"><img class="friend-info__photo" src="%photo_100%" alt="%last_name%"></div>
+            <div class="friend-info__name">%first_name% %last_name%</div>
         </div>
     </li>
 </script>
 <script type="text/template" id="user-template">
-    <div class="user-card">
-        <div class="user-card__photo-box"><img class="user-card__photo" src="%photo_100%" alt="%last_name% %first_name%"></div>
-        <div class="user-card__name">%last_name% "%nickname%" %first_name%</div>
+    <div class="user-info">
+        <div class="user-info__photo-box"><img class="user-info__photo" src="%photo_100%" alt="%last_name%"></div>
+        <div class="user-info__name">%first_name% %last_name% </div>
     </div>
 </script>
-<!--<section id="app" class="container">-->
-<!--    <section class="jumbotron">-->
-<!--        <h1>Тестовое задание - <small>Вебим.ру</small></h1>-->
-<!--        <p class="lead">Сделать веб приложение, на выбранном вами языке, при открытии должно показать кнопку «авторизоваться» по нажатию делает oauth авторизацию ВКонтакте, и показывает имя авторизованного пользователя и 5 любых друзей пользователя. При последующих запусках/заходах на страницу сразу показывает всю информацию т.к. уже понимает, что авторизовано и авторизация запоминается. Бекенд если потребуется, на любой технологии на ваш выбор.</p>-->
-<!--        <hr>-->
-<!--        <div class="text-center">-->
-<!--            <a role="button" href="https://oauth.vk.com/authorize?client_id=7500252&redirect_uri=https://atyhtotoda.github.io/auth_test/&scope=friends&response_type=token&v=5.52" class="btn col-sm-4 btn-outline-primary btn-lg" id="btn">Авторизоваться</a>        </div>-->
 
-<!--        <p><b>Не работает?</b> - Отключите Tracking Protection.-->
-<!--            Или отчистите <a href="#" class="" onclick="localStorage.clear(); location.reload();">localStorage</a></p>-->
-<!--    </section>-->
-<!--    <section class="container">-->
-<!--        <h2 id="username" class="text-center" style="display: none"></h2>-->
-<!--        <hr>-->
-<!--        <div id="friends" class="form-row"></div>-->
-<!--    </section>-->
-<!--</section>-->
-<script type="text/javascript">
-    VK.init({
-        apiId: 7500252
-    });
-</script>
-<script src="app1.js"></script>
 </body>
 </html>
 

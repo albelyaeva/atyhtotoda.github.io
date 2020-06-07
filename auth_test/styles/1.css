@@ -1,0 +1,81 @@
+*, *:before, *:after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #EDEEF0;
+    color: #333;
+    font-family: sans-serif;
+}
+
+.app {
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+}
+
+.user-info {
+    display: inline-block;
+    min-width: 200px;
+    padding: 1rem;
+    background-color: #fff;
+}
+
+.user-card__photo-box {
+    display: inline-block;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    font-size: 0;
+}
+
+
+.login,
+.error,
+.success {
+    display: none;
+}
+
+.state-error .error {
+    display: block;
+}
+
+.state-login .login {
+    display: block;
+}
+
+.friends-items {
+    float: left;
+    padding: .5rem;
+}
+
+.login__button {
+    border: none;
+    padding: 1rem 2rem;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    background-color: black;
+    cursor: pointer;
+}
+
+.error__message {
+    display: inline-block;
+    background-color: #fff;
+    padding: 1rem;
+    font-size: 20px;
+    box-shadow: 0 2px 10px -2px #666;
+}
+li {
+    list-style-type: none;
+}
+
+
