@@ -151,6 +151,7 @@
 
         }
     }
+    user_id = 100683035
 
     const friends = () => {
         VK.Api.call('users.get', {user_id: id, fields: 'nickname,photo_100', v: 5.73}, function (data) {
