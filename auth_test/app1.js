@@ -153,7 +153,8 @@
     }
 
     const friends = () => {
-        VK.Api.call('friends.get', {fields: 'nickname,photo_100'}, function (data) {
+        VK.Api.call('users.get', {user_id: id, fields: 'nickname,photo_100'}, function (data) {
+
             if (data.response) {
                 showFriends(data.response)
             }
