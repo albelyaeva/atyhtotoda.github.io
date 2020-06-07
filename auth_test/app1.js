@@ -9,7 +9,7 @@ function simplestTemplate(templateId, data) {
     return resultTemplate;
 }
 
-let f = (function () {
+var f = (function () {
     function changeAppState(state) {
         document.body.className = 'state-' + state;
     }
