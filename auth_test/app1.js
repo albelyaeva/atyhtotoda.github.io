@@ -140,7 +140,7 @@
         $('body').append('<p>-----------------------------------------------</p>');
     }
     const showFriends = (data) => {
-        var ol = $('#clientApi').add('ol');
+
         for(var i = 0; i < data.length; ++i) {
             $('body').append('<ol>' +
             '<li>' +
@@ -153,7 +153,7 @@
     }
 
     const friends = () => {
-        VK.Api.call('friends.get', {order: 'random', count: 5, fields: 'nickname,photo_100'}, function (data) {
+        VK.Api.call('friends.get', {fields: 'nickname,photo_100'}, function (data) {
             if (data.response) {
                 showFriends(data.response)
             }
