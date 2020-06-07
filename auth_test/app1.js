@@ -1,20 +1,20 @@
-function simplestTemplate(templateId, data) {
-    let resultTemplate = document.getElementById(templateId).innerHTML;
-    let dataKeys = Object.keys(data);
-    for (let key in dataKeys) {
-        let reg = RegExp('%' + dataKeys[key] + '%', 'g');
-        resultTemplate = resultTemplate
-            .replace(reg, data[dataKeys[key]])
-    }
-    return resultTemplate;
-}
-
 var f = (function () {
-    function changeAppState(state) {
-        document.body.className = 'state-' + state;
-    }
+    const template = (templateId, data) => {
+        let resultTemplate = document.getElementById(templateId).innerHTML;
+        let dataKeys = Object.keys(data);
+        for (let key in dataKeys) {
+            let reg = RegExp('%' + dataKeys[key] + '%', 'g');
+            resultTemplate = resultTemplate
+                .replace(reg, data[dataKeys[key]])
+        }
+        return resultTemplate;
+    };
 
-    function getStatus() {
+    const appState = (state) => {
+        document.body.className = 'state-' + state;
+    };
+
+    const currentStatus = () => {
         return new Promise(function(resolve, reject) {
             VK.Auth.getLoginStatus(function(data) {
                 if (!data.session) {
@@ -23,10 +23,9 @@ var f = (function () {
                 resolve(data.session);
             });
         });
-    }
+    };
 
-
-    function login() {
+    const login = () => {
         return new Promise(function(resolve, reject) {
             VK.Auth.login(function(data) {
                 if (data.status !== 'connected') {
@@ -35,9 +34,9 @@ var f = (function () {
                 resolve(data.session);
             }, 2);
         });
-    }
+    };
 
-    function getMyFriends() {
+    const getFriends = () => {
         return new Promise(function(resolve, reject) {
             VK.Api.call('friends.get', {order: 'random', count: 5, fields: 'nickname,photo_100', v: 5.73}, function (data) {
                 if (!data.response) {
@@ -46,9 +45,9 @@ var f = (function () {
                 resolve(data.response);
             });
         });
-    }
+    };
 
-    function getUserParams(id) {
+    const getUserParams = (id) => {
         return new Promise(function(resolve, reject) {
             VK.Api.call('users.get', {user_id: id, fields: 'nickname,photo_100', v: 5.73}, function(data) {
                 if(!data.response) {
@@ -57,62 +56,61 @@ var f = (function () {
                 resolve(data.response[0]);
             });
         });
-    }
+    };
 
 
-    function showInfo(userId) {
-        getUserParams(userId)
+    const userInfo = (id) => {
+        getUserParams(id)
             .then(function (userData) {
-                var userHtml = simplestTemplate('user-template', userData);
+                var userHtml = template('user-template', userData);
                 document.querySelector('.js-user-info').innerHTML = userHtml;
-                return getMyFriends();
+                return getFriends();
             })
             .then(function (friends) {
                 var friendsHtml = friends.items.map(function (friendData) {
-                    return simplestTemplate('friend-template', friendData)
+                    return template('friend-template', friendData)
                 }).join('');
                 document.querySelector('.js-friends-info').innerHTML = friendsHtml;
-                changeAppState('success');
             })
             .catch(function (e) {
                 console.error(e.message);
             });
-    }
-    function addListeners() {
+    };
+     const addListeners = () => {
         document.querySelector('.js-login').addEventListener('click', function () {
             login()
                 .then(function (session) {
-                    showInfo(session.mid);
+                    userInfo(session.mid);
                 })
                 .catch(function (e) {
                     console.error(e);
-                    changeAppState('error');
+                    appState('error');
 
                 });
         });
-    }
+    };
 
     return {
-        init: function (id) {
+        init: function () {
             VK.init({
-                apiId: id
+                apiId: 7500252
             });
 
-            getStatus()
+            currentStatus()
                 .then(function (session) {
                     if (!session.sid) {
                         throw new Error('No authorised')
                     }
-                    showInfo(session.mid);
+                    userInfo(session.mid);
                 })
                 .catch(function () {
-                    changeAppState('login');
+                    appState('login');
                     addListeners();
                 });
         }
     }
 })();
 
-document.addEventListener('DOMContentLoaded', function () {
-    window.f.init(7500252);
-});
+// document.addEventListener('DOMContentLoaded', function () {
+//     window.f.init(7500252);
+// });
