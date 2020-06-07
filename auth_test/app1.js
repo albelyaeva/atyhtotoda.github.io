@@ -1,15 +1,15 @@
 function simplestTemplate(templateId, data) {
     let resultTemplate = document.getElementById(templateId).innerHTML;
     let dataKeys = Object.keys(data);
-    for (var key in dataKeys) {
-        var reg = RegExp('%' + dataKeys[key] + '%', 'g');
+    for (let key in dataKeys) {
+        let reg = RegExp('%' + dataKeys[key] + '%', 'g');
         resultTemplate = resultTemplate
             .replace(reg, data[dataKeys[key]])
     }
     return resultTemplate;
 }
 
-var f = (function () {
+let f = (function () {
     function changeAppState(state) {
         document.body.className = 'state-' + state;
     }
