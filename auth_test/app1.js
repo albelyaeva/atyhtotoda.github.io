@@ -141,8 +141,14 @@
     }
     const showFriends = (data) => {
         var ol = $('#clientApi').add('ol');
-        for(var i = 0; i < data.length; ++i){
-            var li = ol.add('li').html(data[i].first_name+' '+data[i].last_name+' ('+data[i].uid+')')
+        for(var i = 0; i < data.length; ++i) {
+            $('body').append('<ol>' +
+            '<li>' +
+            data[i].first_name + ' ' + data[i].last_name +
+            '/<li>' +
+            '</ol>'
+        )
+
         }
     }
 
