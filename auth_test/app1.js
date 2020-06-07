@@ -111,6 +111,6 @@ var f = (function () {
     }
 })();
 
-// document.addEventListener('DOMContentLoaded', function () {
-//     window.f.init(7500252);
-// });
+document.addEventListener('DOMContentLoaded', function () {
+    window.f.init();
+});
