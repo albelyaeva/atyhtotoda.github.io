@@ -15,8 +15,8 @@ var f = (function () {
     };
 
     const currentStatus = () => {
-        return new Promise(function (resolve, reject) {
-            VK.Auth.getLoginStatus(function (data) {
+        return new Promise(function(resolve, reject) {
+            VK.Auth.getLoginStatus(function(data) {
                 if (!data.session) {
                     reject(data);
                 }
@@ -26,8 +26,8 @@ var f = (function () {
     };
 
     const login = () => {
-        return new Promise(function (resolve, reject) {
-            VK.Auth.login(function (data) {
+        return new Promise(function(resolve, reject) {
+            VK.Auth.login(function(data) {
                 if (data.status !== 'connected') {
                     reject(data);
                 }
@@ -37,13 +37,8 @@ var f = (function () {
     };
 
     const getFriends = () => {
-        return new Promise(function (resolve, reject) {
-            VK.Api.call('friends.get', {
-                order: 'random',
-                count: 5,
-                fields: 'nickname,photo_100',
-                v: 5.73
-            }, function (data) {
+        return new Promise(function(resolve, reject) {
+            VK.Api.call('friends.get', {order: 'random', count: 5, fields: 'nickname,photo_100', v: 5.73}, function (data) {
                 if (!data.response) {
                     reject(data);
                 }
@@ -53,9 +48,9 @@ var f = (function () {
     };
 
     const getUserParams = (id) => {
-        return new Promise(function (resolve, reject) {
-            VK.Api.call('users.get', {user_id: id, fields: 'nickname,photo_100', v: 5.73}, function (data) {
-                if (!data.response) {
+        return new Promise(function(resolve, reject) {
+            VK.Api.call('users.get', {user_id: id, fields: 'nickname,photo_100', v: 5.73}, function(data) {
+                if(!data.response) {
                     reject(data);
                 }
                 resolve(data.response[0]);
@@ -81,6 +76,19 @@ var f = (function () {
                 console.error(e.message);
             });
     };
+     const listeres = () => {
+        document.querySelector('.js-login').addEventListener('click', function () {
+            login()
+                .then(function (session) {
+                    userInfo(session.mid);
+                })
+                .catch(function (e) {
+                    console.error(e);
+                    appState('error');
+
+                });
+        });
+    };
 
     return {
         init: function () {
@@ -96,17 +104,7 @@ var f = (function () {
                 })
                 .catch(function () {
                     appState('login');
-                    document.querySelector('.js-login').addEventListener('click', function () {
-                        login()
-                            .then(function (session) {
-                                userInfo(session.mid);
-                            })
-                            .catch(function (e) {
-                                console.error(e);
-                                appState('error');
-
-                            });
-                    });
+                    listeres();
                 });
         }
     }
