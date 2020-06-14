@@ -2,10 +2,8 @@ var f = (function () {
     const template = (templateId, data) => {
         let resultTemplate = document.getElementById(templateId).innerHTML;
         let dataKeys = Object.keys(data);
-        console.log(dataKeys)
         for (let key in dataKeys) {
             let reg = RegExp('%' + dataKeys[key] + '%', 'g');
-            console.log(reg)
             resultTemplate = resultTemplate
                 .replace(reg, data[dataKeys[key]])
         }
@@ -75,9 +73,6 @@ var f = (function () {
                 let i = 0;
                 getFriends()
                     .then(data => {
-                        //         data.response.items.filter(function (n) {
-                        //     return n['deactivated'] === undefined;
-                        // });
 
                         data.response.items.forEach(n => {
                             if (n.deactivated === undefined) {
@@ -86,9 +81,7 @@ var f = (function () {
                                     i++
                                 }
                             }
-                        })
-
-                        // });
+                        });
 
                         return res;
 
@@ -103,7 +96,7 @@ var f = (function () {
                         console.error(e.message);
                     });
             })
-    }
+    };
 
     return {
         init: function () {
